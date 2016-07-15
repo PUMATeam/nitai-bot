@@ -4,6 +4,7 @@
   "description": "nitai telegram bot",
   "main": "index.js",
   "scripts": {
+    "start": "node --harmony index.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "author": "Benny Zlotnik",
@@ -11,5 +12,8 @@
   "dependencies": {
     "telegram-node-bot": "^3.0.10",
     "winston": "^2.2.0"
+  },
+  "engines": {
+    "node": "6.3.0"
   }
 }
