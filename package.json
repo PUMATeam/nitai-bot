@@ -12,5 +12,8 @@
   "dependencies": {
     "telegram-node-bot": "^3.0.10",
     "winston": "^2.2.0"
+  },
+  "engines": {
+    "node": "6.3.0"
   }
 }
