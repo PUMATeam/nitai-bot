@@ -26,8 +26,8 @@ class TimeController extends NitaiBaseController {
     logStartingTime($)  {
         let date = $._update.message.date;
         let startingTime = moment.unix(date).format('HH:mm:ss');
-        currentDocument.starting_time = date;
-        let result = database.saveDocument(database, currentDocument);
+        this.currentDocument.starting_time = date;
+        let result = database.saveDocument(this.currentDocument);
         winston.log('debug', `Result: ${result}`);
     }
 
