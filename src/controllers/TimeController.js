@@ -1,34 +1,43 @@
 const Telegram  = require('telegram-node-bot');
 const NitaiBaseController = require('./NitaiBaseController.js');
+const winston = require('winston');
+const moment = require('moment');
 
-let started = false;;
 class TimeController extends NitaiBaseController {
+    
+    constructor(database) {
+        super();
+        this.started = false;
+        this.currentDocument = {};
+        this.database = database;
+    }
 
-    menuHandler($) {
-        console.log($.Update);
-        if (started) {
-            $.runMenu({
-                layout: 1,
-                message: 'Has Nitai finished ',
-                'Nitai has finished eating: ': () => {},
-                oneTimeKeyboard: true
-            });
-            started = false;
-        } else {
-            $.runMenu({
-                layout: 1,
-                message: 'Has Nitai started ',
-                'Nitai has started eating, bom apetite': () => {},
-                oneTimeKeyboard: true
-            });
-            started = true;
+    handleTime($) {
+        let command = $.query.command;
+
+        switch (command) {
+            case 'started': this.logStartingTime($);
+                break;
+            case 'finished': this.logFinishingTime($);
+                break;
         }
-        
+    }
+
+    logStartingTime($)  {
+        let date = $._update.message.date;
+        let startingTime = moment.unix(date).format('HH:mm:ss');
+        currentDocument.starting_time = date;
+        let result = database.saveDocument(database, currentDocument);
+        winston.log('debug', `Result: ${result}`);
+    }
+
+    logFinishingTime($) {
+        winston.log('info', $);
     }
 
     get routes() {
         return {
-            'time': 'menuHandler'
+            '/time :command': 'handleTime'
         }
     }
 }
