@@ -10,6 +10,7 @@
   "author": "Benny Zlotnik",
   "license": "ISC",
   "dependencies": {
+    "node-twitter-api": "^1.7.4",
     "telegram-node-bot": "^3.0.10",
     "winston": "^2.2.0"
   },
