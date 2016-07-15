@@ -1,7 +1,14 @@
 'use strict';
+var fs = require('fs');
 
-var api = require('./../apikey.js');
+let api = '';
+if (!fs.exists('./../apikey')) {
+    api = process.env.TELEGRAM_KEY;
+} else {
+    api = require('./../apikey.js').key;
+}
+
 const Telegram  = require('telegram-node-bot');
-const bot = new Telegram.Telegram(api.key);
+const bot = new Telegram.Telegram(api);
 
 module.exports = bot;
