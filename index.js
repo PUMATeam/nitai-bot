@@ -1,1 +1,1 @@
-require('./src/app.js');
+require('./src/router.js');
