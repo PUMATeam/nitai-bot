@@ -9,6 +9,7 @@
   "author": "Benny Zlotnik",
   "license": "ISC",
   "dependencies": {
-    "telegram-node-bot": "^3.0.10"
+    "telegram-node-bot": "^3.0.10",
+    "winston": "^2.2.0"
   }
 }
