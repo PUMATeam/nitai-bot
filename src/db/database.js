@@ -11,7 +11,7 @@ class Database {
 
     saveDocument(document) {
         winston.log('info', `Saving document...`);
-        this.db['food_log'].save(document, (err, result) => {
+        this.db[this.table].save(document, (err, result) => {
             if (err) winston.log('error', `An error occurred while trying to save a document: ${err}`);
             return result;
         });
