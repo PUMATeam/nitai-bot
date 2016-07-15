@@ -11,7 +11,6 @@
   "license": "ISC",
   "dependencies": {
     "moment": "^2.14.1",
-    "pg": "^6.0.2",
     "telegram-node-bot": "^3.0.10",
     "winston": "^2.2.0"
   },
