@@ -3,7 +3,7 @@ var fs = require('fs');
 
 let api = '';
 
-if (!fs.exists('./../apikey')) {
+if (!fs.exists('./../apikey.js')) {
     api = process.env.TELEGRAM_KEY;
 } else {
     api = require('./../apikey.js').key;

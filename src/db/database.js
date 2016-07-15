@@ -4,7 +4,7 @@ const winston = require('winston')
 class Database {
     constructor(url, table) {
         this.table = table;
-        this.db = massive.connect({connectionString: this.url }, (err, db) => {
+        this.db = massive.connect({connectionString: url }, (err, db) => {
                 if (err) winston.log('error', `An error occurred while trying to connect to the database: ${err}`);
                 return db;
         });
