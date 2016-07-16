@@ -1,5 +1,5 @@
 'use strict';
-/*var fs = require('fs');
+var fs = require('fs');
 
 let api = '';
 if (!fs.exists('./../apikey.js')) {
@@ -7,8 +7,7 @@ if (!fs.exists('./../apikey.js')) {
 } else {
     api = require('./../apikey.js').key;
 }
-*/
-var api = require('./../apikey.js').key;
+
 const Telegram  = require('telegram-node-bot');
 const bot = new Telegram.Telegram(api);
 
