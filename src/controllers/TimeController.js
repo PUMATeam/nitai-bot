@@ -16,7 +16,8 @@ class TimeController extends NitaiBaseController {
         let command = $.query.command;
         let date = $._update.message.date;
         let username = $._update.message._from._username
-      
+        this.currentDocument = {};
+
         switch (command) {
             case 'started': this.logStartingTime($, date, username);
                 break;
@@ -55,7 +56,7 @@ class TimeController extends NitaiBaseController {
         this.currentDocument.ending_time = date;
         winston.log('info', `Last food_log id  ${$.chatSession.lastId}`);
 
-        database.saveDocument(this.currentDocument);
+        database.updateDocument(this.currentDocument, $.chatSession.lastId);
     }
 
     get routes() {
