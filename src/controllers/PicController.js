@@ -13,6 +13,7 @@ var downloadTelegramFile = function(filePath, fileId, callback){
     Https.get(Address,callback);
 }
 
+
 class PicController extends NitaiBaseController {
     handle($){
         if ($._message._photo != null ){
@@ -23,9 +24,7 @@ class PicController extends NitaiBaseController {
                 function(response) {
                     response.pipe(file)                         
                     .on('close', function() {
-                    var data = Fs.readFileSync(FileId);
                     console.log("uploading");
-                    console.log(data);
                     // upload media
                     TwitterApi.uploadMedia(FileId,Twitter,function(media){
                     // send media
