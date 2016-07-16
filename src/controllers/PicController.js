@@ -2,7 +2,7 @@ const api  = require('../bot.js').api;
 var https = require('https');
 var fs = require('fs');
 const NitaiBaseController = require('./NitaiBaseController.js');
-var creds = require('./../../apikey.js');
+var creds = require('./../../creds.js');
 var twitter_api = require('../twitter.js');
 var twitter = new twitter_api.client(creds);
 
