@@ -3,8 +3,8 @@ var https = require('https');
 var fs = require('fs');
 const NitaiBaseController = require('./NitaiBaseController.js');
 var creds = require('./../../creds.js');
-var twitter_api = require('../twitter.js');
-var twitter = new twitter_api.client(creds);
+var twitterApi = require('../twitter.js');
+var twitter = new twitterApi.client(creds);
 
 
 class PicController extends NitaiBaseController {
@@ -23,7 +23,7 @@ class PicController extends NitaiBaseController {
                                 console.log("uploading");
                                 console.log(data);
                                 // upload media
-                               twitter_api.uploadMedia(filename,twitter,function(media){
+                               twitterApi.uploadMedia(filename,twitter,function(media){
                                 // send media
                                     console.log('deleting file');
                                     fs.unlinkSync(filename);
@@ -37,7 +37,7 @@ class PicController extends NitaiBaseController {
                                         media_ids: media.media_id_string
                                     }
                                     console.log("sending status");
-                                    twitter_api.sendTweet(params, twitter,
+                                    twitterApi.sendTweet(params, twitter,
                                     function(reply){
                                         console.log(reply);
                                         $.sendMessage(reply);
