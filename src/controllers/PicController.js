@@ -3,17 +3,26 @@ var https = require('https');
 var fs = require('fs');
 const NitaiBaseController = require('./NitaiBaseController.js');
 var creds = require('./../../apikey.js');
-var twitterAPI = require('node-twitter-api');
-var twitter = new twitterAPI({
-                consumerKey: creds.tw_consumer,
-                consumerSecret: creds.tw_consumer_secret,
-                callback: 'stam'          
-            });
+var twitter_api = require('../twitter.js');
+var twitter = new twitter_api.client(creds);
 
 
 class PicController extends NitaiBaseController {
     handle($){
         if ($._message._photo != null ){
+/*            console.log(twitter);
+            var params = {
+                status: "john " + $._message._photo[$._message._photo.length - 1]._fileId,
+            }
+            twitter_api.sendTweet(params, twitter,
+             function(reply){
+                console.log(reply);
+                $.sendMessage(reply);
+                $.sendMessage('תעשו לייק ;)');
+            });
+            
+   
+            exit;*/
             var img = api.getFile($._message._photo[$._message._photo.length - 1]._fileId);
             img.then(function(value) {
                 var file = fs.createWriteStream("file.jpg");
@@ -22,55 +31,34 @@ class PicController extends NitaiBaseController {
                               function(response) {
                               response.pipe(file);                          
                               }).on('close', function() {
+                                var data = fs.readFileSync('file.jpg');
+                                console.log("uploading");
+                                console.log(data);
+                // upload media
+                               twitter_api.uploadMedia('file.jpg',twitter,function(media){
+                                // send media
+                               
+                                    console.log(media);
+                                    var text = "i'm eating";
+                                    if ($._message._caption != null){
+                                        text = $._message._caption;
+                                    }
+                                    var params = {
+                                        status: text,
+                                        media_ids: media.media_id_string
+                                    }
+                                    console.log("sending status");
+                                    twitter_api.sendTweet(params, twitter,
+                                    function(reply){
+                                        console.log(reply);
+                                        $.sendMessage(reply);
+                                        $.sendMessage('תעשו לייק ;)');
+                                    });
 
-                var data = fs.readFileSync('file.jpg');
-                console.log("uploading");
-                console.log(data);
-
-                var send = { "media": '/home/john/Coding/nitai-bot/file.jpg' };
-                console.log(send);
-               
-                twitter.uploadMedia(send, creds.tw_access, creds.tw_acc_secret, 
-                function(error, media, response) {
-
-                    if (!error) {
-
-                        // If successful, a media object will be returned.
-                        console.log(media);
-                        var text = "i'm eating";
-                        if ($._message._caption != null){
-                            text = $._message._caption;
-                        }
-                       console.log("sending status")
-                        twitter.statuses("update", {
-                            status: text,
-                            media_ids: media.media_id_string
-                        },
-                        creds.tw_access,
-                        creds.tw_acc_secret,
-                            function(error, data, response) {
-                                if (error) {
-                                    console.log('creds suck'); 
-                                } else {
-                                    console.log("creds ok"); 
-                                }
-                            }
-                        );
-
-                    }
-                    else {
-                        console.log("error 1");
-                        console.log(error);
-                        fs.unlinkSync("file.jpg");
-                        console.log("deleted");
-                    }
-                 });
-                });
-            });
-            
-
-
-            
+                                });
+                              });
+                
+            });            
         }
     }
 }
