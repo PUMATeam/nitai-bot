@@ -1,4 +1,9 @@
 const config = require('../config');
+
+if (config.database_url === undefined) {
+    throw new Error('DATABASE_URL is not set!');
+}
+
 let pg = require('knex')({
     client: 'pg',
     connection: config.database_url,
@@ -17,19 +22,30 @@ module.exports = {
         return pg(config.table_name)
             .where('id', '=', parseInt(doc_id))
             .update({
-                ending_time: document.ending_time
+                finishing_time: document.finishing_time,
+                has_finished: document.has_finished
             }).then((success, err) => {
                 if (err) {
                     winston.error('An error occured while updating', err);
                 } else {
-                    winston.log('debug', `Successfuly updated ${util.inspect(document)}`);
+                    winston.log('debug', `Successfully updated ${util.inspect(document)}`);
                 }
             });
     },
 
-    getRowById: function(doc_id) {
+    getRowById: function(doc_id, returnFields) {
+        winston.log('debug', `doc_id: ${doc_id}`);
+
         return pg(config.table_name)
-            .where({id: doc_id})
-            .select('id');
-    }
+            .where({ id: doc_id });
+    },
+
+    getRowByField: function(field, value, selectField) {
+        const whereClause = {};
+        whereClause[field] = value;
+
+        return pg(config.table_name)
+            .where(whereClause)
+            .select(selectField);
+    } 
 };
