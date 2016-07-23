@@ -33,12 +33,11 @@ module.exports = {
             });
     },
 
-    getRowById: function(doc_id) {
+    getRowById: function(doc_id, returnFields) {
         winston.log('debug', `doc_id: ${doc_id}`);
 
         return pg(config.table_name)
-            .where({ id: doc_id })
-            .select('id');
+            .where({ id: doc_id });
     },
 
     getRowByField: function(field, value, selectField) {
