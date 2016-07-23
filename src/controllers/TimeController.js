@@ -17,7 +17,7 @@ class TimeController extends NitaiBaseController {
         let date = $._update.message.date;
         let username = $._update.message._from._username
         this.currentDocument = {};
-        this.started = $.chatSession.food_started || false;
+        this.started = this.started || $.chatSession.food_started;
 
         switch (command) {
             case 'started': this.logStartingTime($, date, username);
