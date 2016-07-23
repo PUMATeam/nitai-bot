@@ -97,7 +97,7 @@ class TimeController extends NitaiBaseController {
 
         winston.log('debug', `Starting time: ${start.format('HH:mm:ss')} Finishing time: ${end.format('HH:mm:ss')}`);
 
-        let difference = end.diff(start);
+        let difference = end.diff(start, 'minutes');
         let duration = moment.duration(difference, 'minutes').humanize();
         $.sendMessage(`It took me ${duration} to eat!`);
     }
