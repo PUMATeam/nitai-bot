@@ -1,4 +1,3 @@
-const Telegram = require('telegram-node-bot');
 const NitaiBaseController = require('./NitaiBaseController.js');
 const winston = require('winston');
 const moment = require('moment');
