@@ -10,9 +10,10 @@
   "author": "Benny Zlotnik",
   "license": "ISC",
   "dependencies": {
-    "node-twitter-api": "^1.7.4",
+    "github": "^2.2.0",
     "knex": "^0.11.7",
     "moment": "^2.14.1",
+    "node-twitter-api": "^1.7.4",
     "pg": "^6.0.2",
     "telegram-node-bot": "^3.0.10",
     "winston": "^2.2.0"
