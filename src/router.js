@@ -6,7 +6,7 @@ const GithubController = require('./controllers/GithubController.js');
 const router = require('./bot').router;
 const winston = require('winston');
 
-router.when(['ping'], new PingController());
-router.when('/time :command', new TimeController())
-router.when('/issues', new GithubController())
+router.when(['ping'], new PingController())
+      .when('/time :command', new TimeController())
+      .when('/issues', new GithubController())
       .otherwise(new PicController());
