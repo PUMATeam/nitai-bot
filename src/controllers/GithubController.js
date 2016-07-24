@@ -1,4 +1,3 @@
-//const Telegram = require('telegram-node-bot');
 const NitaiBaseController = require('./NitaiBaseController');
 const Github = require('github'); 
 const {repoName, userName} = require('../config');
